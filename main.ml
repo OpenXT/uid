@@ -18,6 +18,7 @@
 
 (**)
 open Pervasiveext
+open Sys
 
 let verbose = ref false
 
@@ -65,6 +66,8 @@ let main =
 
 	if Ui_config.get_daemonize () then
 		Unixext.daemonize ();
+
+	signal sigpipe Signal_ignore;
 
 	set_dispatcher ();
 	try
