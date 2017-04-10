@@ -366,15 +366,15 @@ let set_server el h fd =
 			    }
 
 let with_xs f =
-	let xs = Xs.daemon_open () in
-	let v = try f xs with e -> (Xs.close xs; raise e) in
-	Xs.close xs;
+	let xs = Xenstore.Xs.daemon_open () in
+	let v = try f xs with e -> (Xenstore.Xs.close xs; raise e) in
+	Xenstore.Xs.close xs;
 	v
 
 let uuid_of_domid domid =
 	with_xs (fun xs ->
-			 let path = xs.Xs.read ("/local/domain/" ^ string_of_int domid ^ "/vm") in
-			 xs.Xs.read (path ^ "/uuid"))
+			 let path = xs.Xenstore.Xs.read ("/local/domain/" ^ string_of_int domid ^ "/vm") in
+			 xs.Xenstore.Xs.read (path ^ "/uuid"))
 let domid_of_ipstring str =
 	let h = List.hd (List.rev (String.split '.' str)) in
 	int_of_string h
