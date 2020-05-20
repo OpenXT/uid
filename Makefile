@@ -19,10 +19,8 @@
 include common.make
 
 PACKAGES = str,uuid,stdext,log,bigarray,camomile,json,jsonrpc,http,dbus,tscommon,xenmmap,xenbus,xenstore
-OCAMLC   = ocamlfind ocamlc -linkpkg -package $(PACKAGES)
-OCAMLOPT = ocamlfind ocamlopt -linkpkg -package $(PACKAGES)
-
-OCAMLOPTFLAGS += -thread
+OCAMLCFLAGS += -linkpkg -package $(PACKAGES)
+OCAMLOPTFLAGS += -linkpkg -package $(PACKAGES) -thread
 
 INTF = dbus_signals.cmi httpserver.cmi
 uid_OBJS = utils ui_config dBus_conv dbus_signals httpserver server dbus_interface file_handler dBus_handler main
